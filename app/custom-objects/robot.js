@@ -51,6 +51,20 @@ function turnRight(currentFacing) {
     : currentFacing + 1;
 }
 
+function getCoordinateBeingUsedForMove(facingInt) {
+  // This could be facingInt % 2 but I found that needlessly complicated to read
+  return facingInt == 1 || facingInt == 3
+    ? 'xCoordinate'
+    : 'yCoordinate';
+}
+
+function getAmountOfMoveAlongAxis(facingInt) {
+  // If we're moving north or east, we want to move by 1 in that axis
+  return facingInt == 0 || facingInt == 1
+    ? 1
+    : -1;
+}
+
 const Robot = EmberObject.extend({
   init() {
     this.unplace();
@@ -84,6 +98,19 @@ const Robot = EmberObject.extend({
     if (!this.isOnTable) return;
 
     this.set('facing', turnRight(this.facing));
+  },
+
+  move() {
+    if (!this.isOnTable) return;
+
+    const coordinateBeingUsed = getCoordinateBeingUsedForMove(this.facing);
+    const currentCoordinate = this[coordinateBeingUsed];
+    const amountOfMoveAlongAxis = getAmountOfMoveAlongAxis(this.facing);
+    const newCoordinate = currentCoordinate + amountOfMoveAlongAxis;
+
+    if(coordinateIsValid(newCoordinate)) {
+      this.set(coordinateBeingUsed, newCoordinate);
+    }
   },
 
   report() {

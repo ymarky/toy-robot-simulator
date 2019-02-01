@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 // import Robot from 'toy-robot-simulator/custom-objects/robot';
 
-function formatCommand(text) {
+function formatCommandString(text) {
   return text.trim().toLocaleUpperCase();
 }
 
@@ -32,7 +32,7 @@ function placeCommandIsValid(stringToParse) {
     : placeCommandParamsAreValid(splits[1]);
 }
 
-function commandIsValid(command) {
+function commandStringIsValid(command) {
   return command == 'MOVE'
     || command == 'LEFT'
     || command == 'RIGHT'
@@ -42,8 +42,8 @@ function commandIsValid(command) {
 
 function parseTextInputIntoCommands(textInput) {
   return textInput.split('\n')
-    .map(formatCommand)
-    .filter(commandIsValid);
+    .map(formatCommandString)
+    .filter(commandStringIsValid);
 }
 
 /*

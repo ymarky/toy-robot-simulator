@@ -1,8 +1,10 @@
 <h1>Toy Robot Simulator</h1>
 
 Input:<br />
-<textarea rows="10" cols="50"></textarea><br />
-<button type="button">Clear</button> <button type="button">GO</button><br />
+<textarea rows="10" cols="50">{{this.textInput}}</textarea><br />
+<button {{action "clearInput"}}>Clear</button> <button {{action "parseInput"}}>GO</button><br />
 <br />
 Output:<br />
-<textarea rows="10" cols="50"></textarea><br />
+<div>
+  {{this.textOutput}}
+</div><br />

@@ -1,4 +1,67 @@
 import Controller from '@ember/controller';
+// import Robot from 'toy-robot-simulator/custom-objects/robot';
+
+function formatCommand(text) {
+  return text.trim().toLocaleUpperCase();
+}
+
+function isValidCoordinate(coordinate) {
+  return coordinate >= 0 && coordinate <= 4;
+}
+
+function isValidFacing(facingString) {
+  return facingString == 'NORTH'
+    || facingString == 'EAST'
+    || facingString == 'WEST'
+    || facingString == 'SOUTH';
+}
+
+function placeCommandParamsAreValid(paramsString) {
+  const params = paramsString.split(',');
+  return params.length === 3
+    && isValidCoordinate(params[0])
+    && isValidCoordinate(params[1])
+    && isValidFacing(params[2]);
+}
+
+function placeCommandIsValid(stringToParse) {
+  const splits = stringToParse.split(' ');
+
+  return splits.length != 2 || splits[0] != 'PLACE'
+    ? false
+    : placeCommandParamsAreValid(splits[1]);
+}
+
+function commandIsValid(command) {
+  return command == 'MOVE'
+    || command == 'LEFT'
+    || command == 'RIGHT'
+    || command == 'REPORT'
+    || placeCommandIsValid(command);
+}
+
+function parseTextInputIntoCommands(textInput) {
+  return textInput.split('\n')
+    .map(formatCommand)
+    .filter(commandIsValid);
+}
+
+/*
+Some test input
+
+move
+left
+what
+sdfjkhgjsdkjmfh
+place 2,3,NORTH
+place
+reight
+RIGHT
+place 2
+place 2,3
+sdfsd
+report
+*/
 
 export default Controller.extend({
   textInput: '',
@@ -9,7 +72,19 @@ export default Controller.extend({
       this.set('textInput', '');
     },
     parseInput() {
-      this.set('textOutput', this.textInput);
+      console.log(`parseInput!`);
+      console.log(this.textInput);
+
+      // Parse textInput into an array of commands
+      const commands = parseTextInputIntoCommands(this.textInput);
+
+      if (!commands.length || commands.length == 0) return;
+
+      console.log(`Got some commands!`);
+      console.log(commands);
+
+      // Create a new robot object
+      // Execute our commands on the robot object
     },
   },
 });

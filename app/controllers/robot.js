@@ -1,66 +1,29 @@
 import Controller from '@ember/controller';
+import RobotCommandParser from 'toy-robot-simulator/custom-libraries/robot-command-parser';
 // import Robot from 'toy-robot-simulator/custom-objects/robot';
-
-function formatCommandString(text) {
-  return text.trim().toLocaleUpperCase();
-}
-
-function isValidCoordinate(coordinate) {
-  return coordinate >= 0 && coordinate <= 4;
-}
-
-function isValidFacing(facingString) {
-  return facingString == 'NORTH'
-    || facingString == 'EAST'
-    || facingString == 'WEST'
-    || facingString == 'SOUTH';
-}
-
-function placeCommandParamsAreValid(paramsString) {
-  const params = paramsString.split(',');
-  return params.length === 3
-    && isValidCoordinate(params[0])
-    && isValidCoordinate(params[1])
-    && isValidFacing(params[2]);
-}
-
-function placeCommandIsValid(stringToParse) {
-  const splits = stringToParse.split(' ');
-
-  return splits.length != 2 || splits[0] != 'PLACE'
-    ? false
-    : placeCommandParamsAreValid(splits[1]);
-}
-
-function commandStringIsValid(command) {
-  return command == 'MOVE'
-    || command == 'LEFT'
-    || command == 'RIGHT'
-    || command == 'REPORT'
-    || placeCommandIsValid(command);
-}
-
-function parseTextInputIntoCommands(textInput) {
-  return textInput.split('\n')
-    .map(formatCommandString)
-    .filter(commandStringIsValid);
-}
 
 /*
 Some test input
 
 move
 left
-what
-sdfjkhgjsdkjmfh
-place 2,3,NORTH
-place
-reight
 RIGHT
+rEpOrT
+place 2,3,north
+place 1,1,EAST
+place 0,0,WeSt
+place 4,4,sOuTh
+invalid
+place
 place 2
 place 2,3
-sdfsd
-report
+place 2,3,INVALID
+place -1,3,north
+place 5,3,north
+place 2,-1,north
+place 2,5,north
+place 2,3,north,invalid
+place 2,3,north invalid
 */
 
 export default Controller.extend({
@@ -76,7 +39,7 @@ export default Controller.extend({
       console.log(this.textInput);
 
       // Parse textInput into an array of commands
-      const commands = parseTextInputIntoCommands(this.textInput);
+      const commands = RobotCommandParser.parseTextInputIntoCommands(this.textInput);
 
       if (!commands.length || commands.length == 0) return;
 

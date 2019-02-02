@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import CommonRobotFunctions from 'toy-robot-simulator/custom-libraries/common-robot-functions';
 
 function translateFacingIntToString(facingInt) {
   switch (facingInt) {
@@ -26,17 +27,6 @@ function translateFacingStringToInt(facingString) {
     default: // covers the 'NORTH' case
       return 0;
   }
-}
-
-function facingStringIsValid(facingString) {
-  return facingString == 'NORTH'
-    || facingString == 'EAST'
-    || facingString == 'WEST'
-    || facingString == 'SOUTH';
-}
-
-function coordinateIsValid(coordinate) {
-  return coordinate >= 0 && coordinate <=4;
 }
 
 function turnLeft(currentFacing) {
@@ -78,9 +68,9 @@ const Robot = EmberObject.extend({
   },
 
   place(xCoordinate, yCoordinate, facingString) {
-    if(!coordinateIsValid(xCoordinate)) return;
-    if(!coordinateIsValid(yCoordinate)) return;
-    if(!facingStringIsValid(facingString)) return;
+    if(!CommonRobotFunctions.isValidCoordinate(xCoordinate)) return;
+    if(!CommonRobotFunctions.isValidCoordinate(yCoordinate)) return;
+    if(!CommonRobotFunctions.isValidFacing(facingString)) return;
 
     this.set('isOnTable', true);
     this.set('xCoordinate', xCoordinate);
@@ -108,7 +98,7 @@ const Robot = EmberObject.extend({
     const amountOfMoveAlongAxis = getAmountOfMoveAlongAxis(this.facing);
     const newCoordinate = currentCoordinate + amountOfMoveAlongAxis;
 
-    if(coordinateIsValid(newCoordinate)) {
+    if(CommonRobotFunctions.isValidCoordinate(newCoordinate)) {
       this.set(coordinateBeingUsed, newCoordinate);
     }
   },

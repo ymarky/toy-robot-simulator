@@ -5,6 +5,8 @@ Input:<br />
 <button {{action "clearInput"}}>Clear</button> <button {{action "parseInput"}}>GO</button><br />
 <br />
 Output:<br />
-<div>
-  {{this.textOutput}}
-</div><br />
+<ul>
+  {{#each results as |result|}}
+    <li>{{result.xCoordinate}},{{result.yCoordinate}},{{result.facing}}</li>
+  {{/each}}
+</ul>

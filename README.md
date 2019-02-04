@@ -1,7 +1,13 @@
 # toy-robot-simulator
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Toy robot simulator coding test. Supports the following commands:
+* PLACE X,Y,F
+* MOVE
+* LEFT
+* RIGHT
+* REPORT
+
+A test command list to exercise the application can be found in test_commands.txt in the root directory.
 
 ## Prerequisites
 

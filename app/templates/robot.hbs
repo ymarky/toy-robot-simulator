@@ -1,10 +1,10 @@
 <h1>Toy Robot Simulator</h1>
 
-Input:<br />
-{{textarea value=this.textInput cols="50" rows="10" placeholder="Input commands and click GO to create a new robot to run the commands upon"}}<br />
-<button {{action "clearInput"}}>Clear</button> <button {{action "parseInput"}}>GO</button><br />
-<br />
-Output:<br />
+Input:<br>
+{{textarea value=this.textInput cols="50" rows="10" placeholder="Input commands and click GO to create a new robot to run the commands upon"}}<br>
+<button {{action "clearInput"}}>Clear</button> <button {{action "parseInput"}}>GO</button><br>
+<br>
+Output:<br>
 <ul>
   {{#each results as |result|}}
     <li>{{result.xCoordinate}},{{result.yCoordinate}},{{result.facing}}</li>

@@ -43,40 +43,40 @@ module('Unit | Custom Libraries | RobotCommandParser', function() {
     // Assert
     assert.deepEqual(result, [
       {
-        "command": "MOVE"
+        'command': 'MOVE'
       },
       {
-        "command": "LEFT"
+        'command': 'LEFT'
       },
       {
-        "command": "RIGHT"
+        'command': 'RIGHT'
       },
       {
-        "command": "REPORT"
+        'command': 'REPORT'
       },
       {
-        "command": "PLACE",
-        "facing": "NORTH",
-        "xCoordinate": "2",
-        "yCoordinate": "3"
+        'command': 'PLACE',
+        'facing': 'NORTH',
+        'xCoordinate': 2,
+        'yCoordinate': 3
       },
       {
-        "command": "PLACE",
-        "facing": "EAST",
-        "xCoordinate": "1",
-        "yCoordinate": "1"
+        'command': 'PLACE',
+        'facing': 'EAST',
+        'xCoordinate': 1,
+        'yCoordinate': 1
       },
       {
-        "command": "PLACE",
-        "facing": "WEST",
-        "xCoordinate": "0",
-        "yCoordinate": "0"
+        'command': 'PLACE',
+        'facing': 'WEST',
+        'xCoordinate': 0,
+        'yCoordinate': 0
       },
       {
-        "command": "PLACE",
-        "facing": "SOUTH",
-        "xCoordinate": "4",
-        "yCoordinate": "4"
+        'command': 'PLACE',
+        'facing': 'SOUTH',
+        'xCoordinate': 4,
+        'yCoordinate': 4
       }]);
   });
 });

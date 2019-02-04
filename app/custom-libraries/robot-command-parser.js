@@ -40,8 +40,8 @@ export default class RobotCommandParser {
     const params = splits[1].split(',');
     return {
       command: splits[0],
-      xCoordinate: params[0],
-      yCoordinate: params[1],
+      xCoordinate: Number.parseInt(params[0]),
+      yCoordinate: Number.parseInt(params[1]),
       facing: params[2],
     };
   }

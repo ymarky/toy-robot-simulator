@@ -57,19 +57,17 @@ export default Controller.extend({
     },
     parseInput() {
       const commands = RobotCommandParser.parseTextInputIntoCommands(this.textInput);
+      const commandsLength = commands.length;
 
-      if (!commands.length || commands.length == 0) return;
+      if (!commandsLength || commandsLength === 0) return;
 
       const robot = Robot.create();
       const results = [];
 
       commands.forEach((c) => {
-        console.log(c);
         const result = executeCommandOnRobot(robot, c);
-        console.log(robot);
 
         if(c.command == 'REPORT') {
-          console.log(result);
           results.push(result);
         }
       });

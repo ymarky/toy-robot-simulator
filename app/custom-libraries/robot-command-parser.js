@@ -47,7 +47,7 @@ export default class RobotCommandParser {
   }
 
   static commandStringToCommandObject(commandString) {
-    // This function a commandString validated by the commandStringIsValid function
+    // This function takes a commandString validated by the commandStringIsValid function
     return commandString[0] == 'P'
       ? RobotCommandParser.buildPlaceCommand(commandString)
       : RobotCommandParser.buildNonPlaceCommand(commandString);

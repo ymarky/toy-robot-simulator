@@ -2,36 +2,6 @@ import Controller from '@ember/controller';
 import RobotCommandParser from 'toy-robot-simulator/custom-libraries/robot-command-parser';
 import Robot from 'toy-robot-simulator/custom-objects/robot';
 
-/*
-Some test input
-
-move
-left
-RIGHT
-rEpOrT
-place 2,3,north
-place 1,1,EAST
-place 0,0,WeSt
-place 4,4,sOuTh
-invalid
-place
-place 2
-place 2,3
-place 2,3,INVALID
-place -1,3,north
-place 5,3,north
-place 2,-1,north
-place 2,5,north
-place 2,3,north,invalid
-place 2,3,north invalid
-
-place 2,3,west
-report
-move
-report
-*/
-
-// This probably belongs to the robot
 function executeCommandOnRobot(robot, command) {
   switch (command.command) {
     case 'MOVE':
@@ -67,7 +37,7 @@ export default Controller.extend({
       commands.forEach((c) => {
         const result = executeCommandOnRobot(robot, c);
 
-        if(c.command == 'REPORT') {
+        if(c.command === 'REPORT' && result.isOnTable) {
           results.push(result);
         }
       });
